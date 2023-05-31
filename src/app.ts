@@ -12,37 +12,36 @@ const winningCombos = [
 
 
 /*---------------------------- Variables (state) ----------------------------*/
-let board, turn, winner, tie
-
+let turn: number, winner: boolean, tie: boolean
+let board: number[]
 
 /*------------------------ Cached Element References ------------------------*/
 const squareEls = document.querySelectorAll('.sqr')
-const messageEl = document.getElementById('message')
-const resetBtnEl = document.querySelector('button')
+const messageEl = document.querySelector<HTMLElement>('#message')!
+const resetBtnEl = document.querySelector<HTMLButtonElement>('button')!
 
 /*----------------------------- Event Listeners -----------------------------*/
-document.querySelector('.board').addEventListener('click', handleClick)
-resetBtnEl.addEventListener('click', init)
+document.querySelector<HTMLElement>('.board')?.addEventListener('click', handleClick)!
+resetBtnEl.addEventListener('click', init)!
 /*-------------------------------- Functions --------------------------------*/
 
 init()
 
 function init() {
-  board = [null, 1, null, -1, null, 1, -1, null, null]
+  board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
   turn = 1
   winner = false
   tie = false
   render()
 }
 
-function placePiece(idx) {
+function placePiece(idx: number) {
   board[idx] = turn
 }
 
-function handleClick(evt) {
-  console.log(evt.target.id)
-  const sqIdx = parseInt(evt.target.id.replace('sq', ''))
-
+function handleClick(evt: MouseEvent) {
+  const element = evt.target as HTMLElement
+  const sqIdx = parseInt(element.id.replace('sq', ''))
   if (isNaN(sqIdx) || board[sqIdx] || winner) return
   placePiece(sqIdx)
   checkForTie()
@@ -52,7 +51,7 @@ function handleClick(evt) {
 }
 
 function checkForTie() {
-  if (board.includes(null)) return
+  if (board.includes(0)) return
   tie = true
 }
 

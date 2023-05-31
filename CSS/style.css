@@ -7,6 +7,8 @@ margin: 0;
 height: 100vh;
 display: flex;
 flex-direction: column;
+justify-content: center;
+align-items: center;
 }
 
 section.board {
@@ -21,4 +23,8 @@ border: 3px solid black;
 font-size: 8vmin;
 text-align: center;
 vertical-align: middle;
+}
+
+button {
+  margin-top: 1vw;
 }
